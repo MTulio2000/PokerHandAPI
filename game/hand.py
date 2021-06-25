@@ -1,4 +1,4 @@
-from game.card import Card
+from game.utils.card import Card
 from game.strategies.context import Context
 from game.strategies.royalflush import evaluate as royalflush
 from game.strategies.straightflush import evaluate as straightflush

@@ -1,6 +1,6 @@
-from game.card import *
+from game.utils.card import *
 
-def samesuit(cards : list(Card))-> bool :
+def samesuit(cards)-> bool :
     same = [0,0,0,0]
     for card in cards:
         same[card.suit]+=1

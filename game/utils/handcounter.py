@@ -1,15 +1,16 @@
-from game.card import *
+from game.utils.card import *
+from game.utils.number import *
 
-def count(cards : list(Card))-> list :
+def count(cards)-> list :
     counter = []
     for kind in kinds:
         counter.append(cards.count(kind))
     return counter
 
-def count(cards : list(Card), n : int) -> int:
+def count(cards, n : int) -> int:
     return count(cards).count(n)
 
-def count(cards : list(Card), n : int, total : int) -> bool:
+def count(cards, n : int, total : int) -> bool:
     return count(cards,n) == total
 
 __all__ = [

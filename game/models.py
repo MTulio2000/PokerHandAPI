@@ -1,11 +1,14 @@
 from django.db import models
 from player.models import Player
+from game.hand import Hand
 
 MAX_PLAYERS = 10
 INITIAL_CHIPS = 4300
 
 class Game(models.Model):
-     players = []
+     players = [(Player,float,Hand)]
+     deck = []
+     hidden = []
 
      name = models.CharField(max_length=15)
      havePass = models.BooleanField(default=False)

@@ -1,10 +1,7 @@
-from game.card import *
-from game.utils.samesuit import samesuit
-from game.utils.sequence import sequence
+from game.utils.card import *
+from game.strategies.straightflush import evaluate as straightflush
 
-def evaluate(cards : list(Card))-> bool :
-    same = samesuit(cards)
-    seq = sequence(cards)
+def evaluate(cards)-> bool :
     haveKing = KING in cards
     haveAce = ACE in cards
-    return seq and same and haveKing and haveAce
+    return straightflush(cards) and haveKing and haveAce

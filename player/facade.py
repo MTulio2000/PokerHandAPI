@@ -1,5 +1,4 @@
 from player.models import Player
-from hand.models import Hand
 
 __all__ = [
     'create_player'

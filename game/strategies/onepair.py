@@ -1,5 +1,4 @@
-from game.card import *
 from game.utils.handcounter import *
 
-def evaluate(cards : list(Card))-> bool :
+def evaluate(cards)-> bool :
     return count(cards,2,1)
