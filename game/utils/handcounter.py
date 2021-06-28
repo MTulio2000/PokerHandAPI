@@ -5,6 +5,7 @@ def count(cards)-> list :
     counter = []
     for kind in kinds:
         counter.append(cards.count(kind))
+    cards.counter = counter
     return counter
 
 def count(cards, n : int) -> int:

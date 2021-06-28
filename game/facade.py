@@ -1,9 +1,17 @@
+from game.utils.number import FOUR
 from game.models import *
 from player.models import Player
 import random
 from game.utils.deck import deck
-from game.hand import Hand
+from game.hand import *
 from itertools import product
+from game.strategies.four import draw as fourDraw
+from game.strategies.flush import draw as flushDraw
+from game.strategies.onepair import draw as oneDraw
+from game.strategies.three import draw as threeDraw
+from game.strategies.twopair import draw as twoDraw
+from game.strategies.highcard import draw as highDraw
+from game.strategies.straight import draw as straightDraw
 
 #add a plaeyr in a game
 def addPlayer(game : Game, player : Player, password : str) -> bool:
@@ -53,12 +61,39 @@ def flip_card(game : Game) -> bool:
         return True
     return False
 
+#draw object to help to verify the draw case
+draw = {
+    FOUR_OF_A_KIND : fourDraw,
+    FLUSH : flushDraw,
+    ONE_PAIR : oneDraw,
+    TWO_PAIR : twoDraw,
+    THREE_OF_A_KIND : threeDraw,
+    FULL_HOUSE : threeDraw,
+    HIGH_CARD : highDraw,
+    STRAIGHT : straightDraw,
+    STRAIGHT_FLUSH : straightDraw
+}
+
 #verify the winner
-#precisa desenvolver ainda
 def check_winner(game : Game) -> int:
+    best = 0
+    index = -1
+    def setWinner(i):
+        return i,game.players[i][2].value
+    def verifyWinner(i):
+        hand1 = game.players[index][2]
+        hand2 = game.players[i][2]
+        type_hand = game.players[i][2].value
+        return draw[type_hand]([hand1,hand2]) == 1
+
+    def verifyMajor(i):
+        return best < game.players[i][2].value
+
     for i in range(len(game.players)):
         game.players[i][2].evaluate()
-    index = -1
+        if game.players[i][2].value == best:
+            if verifyWinner(i) or verifyMajor(i):
+                index,best = setWinner(i)
     return index
     
 __all__ = [
