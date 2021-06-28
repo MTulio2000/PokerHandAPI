@@ -1,6 +1,6 @@
 from game.utils.samesuit import samesuit
 from game.utils.sequence import sequence
-from game.hand import ACE
+from game.utils.hand import ACE
 from game.strategies.highcard import draw as highDraw
 
 def evaluate(cards)-> bool :

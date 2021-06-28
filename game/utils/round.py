@@ -10,6 +10,7 @@ FOLD = 5
 INITIAL = 0
 FINAL = 1
 
+#possible actions for each state
 possible_actions = {
     INITIAL : [BET,CHECK],
     FINAL : [FOLD,RAISE,CALL]
@@ -22,7 +23,12 @@ class Round():
         self.state = INITIAL
         self.major = 0
 
-    def addPlayer(self,player : Player, action : int,value = 0.0) -> None:
+    #add a player round
+    def addPlayer(self,player : Player, action : int,value = 0.0) -> bool:
         if possible_actions[self.state].count(action) and value >= self.major:
             self.players.append(player)
             self.value += value
+            if action >= 1:
+                self.state = FINAL
+            return True
+        return False

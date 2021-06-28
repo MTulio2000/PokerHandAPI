@@ -3,7 +3,7 @@ from game.models import *
 from player.models import Player
 import random
 from game.utils.deck import deck
-from game.hand import *
+from game.utils.hand import *
 from itertools import product
 from game.strategies.four import draw as fourDraw
 from game.strategies.flush import draw as flushDraw
@@ -12,6 +12,7 @@ from game.strategies.three import draw as threeDraw
 from game.strategies.twopair import draw as twoDraw
 from game.strategies.highcard import draw as highDraw
 from game.strategies.straight import draw as straightDraw
+from game.utils.round import Round
 
 #add a plaeyr in a game
 def addPlayer(game : Game, player : Player, password : str) -> bool:
@@ -96,11 +97,20 @@ def check_winner(game : Game) -> int:
                 index,best = setWinner(i)
     return index
     
+def newRound(game : Game):
+    game.round.append(Round())
+
+def setRoundPlayer(game : Game, player : Player, action : int, value = 0) -> bool:
+    size = len(game.round)-1
+    return size >= 0 and game.round[size].addPlayer(player,action,value)
+
 __all__ = [
     'player_bet',
     'remove_player',
     'addPlayer',
     'initialize_game',
     'flip_card',
-    'check_winner'
+    'check_winner',
+    'setRoundPlayer',
+    'newRound',
 ]
