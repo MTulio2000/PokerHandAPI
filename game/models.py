@@ -6,6 +6,7 @@ from game.utils.hand import Hand
 MAX_PLAYERS = 10
 INITIAL_CHIPS = 4300
 
+#game table
 class Game(models.Model):
      players = [(Player,float,Hand)]
      deck, round,hidden = [],[Round],[]

@@ -1,12 +1,10 @@
 from player.models import Player
+from game.utils.hand import Hand
 
 __all__ = [
-    'create_player'
+    'set_hand'
 ]
 
-def create_player(name : str, hand : Hand) -> bool:
-    return Player.objects.create(name,hand)
-
+#set the hand for the player in the current game
 def set_hand(player : Player, hand:Hand) -> bool:
     player.hand = hand
-    player.save()

@@ -29,13 +29,6 @@ def removePlayer(game : Game, player : Player, password : str) -> bool:
         return True
     return False
 
-#preciso olhar essa funçao e fazer as de apostas
-def player_bet(game : Game, player : Player, value : float) -> bool:
-    if game.players[str(player._id)][1] >= value:
-        game.players[str(player._id)][1]-=value
-        return True
-    return False
-
 #deal the cards for all players and the hidden cards
 def deal(game : Game) -> None:
     for i, in product(len(game.players),2):
@@ -97,15 +90,16 @@ def check_winner(game : Game) -> int:
                 index,best = setWinner(i)
     return index
     
+#start a new round
 def newRound(game : Game):
     game.round.append(Round())
 
+#set player action in the current round
 def setRoundPlayer(game : Game, player : Player, action : int, value = 0) -> bool:
     size = len(game.round)-1
     return size >= 0 and game.round[size].addPlayer(player,action,value)
 
 __all__ = [
-    'player_bet',
     'remove_player',
     'addPlayer',
     'initialize_game',

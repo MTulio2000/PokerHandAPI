@@ -1,4 +1,4 @@
-
+#context is the base to run strategy design pattern
 class Context():
     def __init__(self):
         self.__strategy = -1
